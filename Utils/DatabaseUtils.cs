@@ -15,18 +15,17 @@ namespace RestaurantManagement.Utils
 
         public static SqlDataReader ExecuteSqlQuery(string sqlQuery, SqlParameter[]? parameters = null)
         {
-            SqlConnection connection = new(_connectString);
+            using SqlConnection connection = new(_connectString);
             connection.Open();
 
-            using (SqlCommand sqlCommand = new(sqlQuery, connection))
-            {
-                if (parameters != null)
-                {
-                    sqlCommand.Parameters.AddRange(parameters);
-                }
+            using SqlCommand sqlCommand = new(sqlQuery, connection);
 
-                return sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            if (parameters != null)
+            {
+                sqlCommand.Parameters.AddRange(parameters);
             }
+
+            return sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
         }
     }
 }
