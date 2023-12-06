@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using RestaurantManagement.Source.Models;
 
 namespace RestaurantManagement.Source.Services
 {
@@ -14,22 +16,36 @@ namespace RestaurantManagement.Source.Services
         {
             string passwordEncode = new MD5Encoder(password).Encode();
 
-            MySqlDataReader reader = DatabaseUtils.ExecuteSqlQuery(
-                "SELECT * FROM users WHERE username = @username AND password = @password",
-                new []
-                {
-                    new MySqlParameter("@username", username),
-                    new MySqlParameter("@password", passwordEncode),
-                });
+            string query = "SELECT * FROM users WHERE username = @username AND password = @password";
 
-            string rd_username = "EMPTY";
+            QueryParameter parameter = new();
+            parameter.AddParameter("@username", username)
+                     .AddParameter("@password", passwordEncode);
 
-            while (reader.Read())
+            DataTable rows = DatabaseUtils.ExecuteQuery(query, parameter);
+
+            if (rows.Rows.Count > 0)
             {
-                rd_username = reader["username"] is not null ? reader["username"].ToString() : rd_username;
+                DataRow firstRow = rows.Rows[0];
+
+                if (firstRow != null)
+                {
+                    User user = new();
+
+                    if (firstRow.Table.Columns.Contains("username")) 
+                        user.Username = Convert.ToString(firstRow["username"]);
+
+                    if (firstRow.Table.Columns.Contains("id")) 
+                        user.Id = Convert.ToInt32(firstRow["id"]);
+
+                    if (firstRow.Table.Columns.Contains("is_admin"))
+                        user.IsAdmin = Convert.ToBoolean(firstRow["is_admin"]);
+
+                    return "Success";
+                }
             }
 
-            return rd_username;
+            return "User Not Found";
         }
     }
 }

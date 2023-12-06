@@ -12,18 +12,31 @@ namespace RestaurantManagement.Source.Utils
 {
     internal class DatabaseUtils
     {
-        public static MySqlDataReader ExecuteSqlQuery(string sqlQuery, MySqlParameter[] parameters = null)
+        public static DataTable ExecuteQuery(string sqlQuery, QueryParameter? queryParameter = null)
         {
             using MySqlConnection connection = DatabaseConfig.GetConnection();
+
             connection.Open();
 
             using MySqlCommand sqlCommand = new(sqlQuery, connection);
-            if (parameters != null)
+
+            if (queryParameter != null)
             {
-                sqlCommand.Parameters.AddRange(parameters);
+                foreach (var parameter in queryParameter.GetParameter())
+                {
+                    sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value);
+                }
             }
 
-            return sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            string rawSqlQuery = sqlCommand.CommandText;
+
+            using MySqlDataAdapter adapter = new(sqlCommand);
+
+            DataTable dataTable = new();
+
+            adapter.Fill(dataTable);
+
+            return dataTable;
         }
     }
 }
