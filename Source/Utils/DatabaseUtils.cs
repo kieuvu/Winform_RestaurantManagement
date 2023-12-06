@@ -1,25 +1,23 @@
-﻿using RestaurantManagement.Configs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+using RestaurantManagement.Source.Configs;
 
-namespace RestaurantManagement.Utils
+namespace RestaurantManagement.Source.Utils
 {
     internal class DatabaseUtils
     {
-        private static readonly string _connectString = DatabaseConfig.GetConnectionString();
-
-        public static SqlDataReader ExecuteSqlQuery(string sqlQuery, SqlParameter[]? parameters = null)
+        public static MySqlDataReader ExecuteSqlQuery(string sqlQuery, MySqlParameter[] parameters = null)
         {
-            using SqlConnection connection = new(_connectString);
+            using MySqlConnection connection = DatabaseConfig.GetConnection();
             connection.Open();
 
-            using SqlCommand sqlCommand = new(sqlQuery, connection);
-
+            using MySqlCommand sqlCommand = new(sqlQuery, connection);
             if (parameters != null)
             {
                 sqlCommand.Parameters.AddRange(parameters);

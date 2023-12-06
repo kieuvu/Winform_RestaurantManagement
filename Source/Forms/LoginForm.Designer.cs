@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            button2 = new Button();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            LoginHandlerButton = new Button();
+            LoginPassword = new TextBox();
+            LoginUsername = new TextBox();
             label2 = new Label();
             label1 = new Label();
             groupBox1.SuspendLayout();
@@ -39,9 +39,9 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(LoginHandlerButton);
+            groupBox1.Controls.Add(LoginPassword);
+            groupBox1.Controls.Add(LoginUsername);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
@@ -51,30 +51,31 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Đăng nhập";
             // 
-            // button2
+            // LoginHandlerButton
             // 
-            button2.Cursor = Cursors.Hand;
-            button2.Location = new Point(200, 108);
-            button2.Name = "button2";
-            button2.Size = new Size(97, 35);
-            button2.TabIndex = 5;
-            button2.Text = "Đăng nhập";
-            button2.UseVisualStyleBackColor = true;
+            LoginHandlerButton.Cursor = Cursors.Hand;
+            LoginHandlerButton.Location = new Point(200, 108);
+            LoginHandlerButton.Name = "LoginHandlerButton";
+            LoginHandlerButton.Size = new Size(97, 35);
+            LoginHandlerButton.TabIndex = 5;
+            LoginHandlerButton.Text = "Đăng nhập";
+            LoginHandlerButton.UseVisualStyleBackColor = true;
+            LoginHandlerButton.Click += LoginHandlerButton_Click;
             // 
-            // textBox2
+            // LoginPassword
             // 
-            textBox2.Location = new Point(107, 71);
-            textBox2.Name = "textBox2";
-            textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(190, 23);
-            textBox2.TabIndex = 3;
+            LoginPassword.Location = new Point(107, 71);
+            LoginPassword.Name = "LoginPassword";
+            LoginPassword.PasswordChar = '*';
+            LoginPassword.Size = new Size(190, 23);
+            LoginPassword.TabIndex = 3;
             // 
-            // textBox1
+            // LoginUsername
             // 
-            textBox1.Location = new Point(107, 40);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(190, 23);
-            textBox1.TabIndex = 2;
+            LoginUsername.Location = new Point(107, 40);
+            LoginUsername.Name = "LoginUsername";
+            LoginUsername.Size = new Size(190, 23);
+            LoginUsername.TabIndex = 2;
             // 
             // label2
             // 
@@ -114,10 +115,10 @@
         #endregion
 
         private GroupBox groupBox1;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox LoginPassword;
+        private TextBox LoginUsername;
         private Label label2;
         private Label label1;
-        private Button button2;
+        private Button LoginHandlerButton;
     }
 }
