@@ -22,7 +22,7 @@ namespace RestaurantManagement.Source.Utils
 
         public QueryParameter AddParameter(string key, string value)
         {
-            this._parameters.Add(key, value);
+            this._parameters.Add("@" + key, value);
             return this;
         }
 

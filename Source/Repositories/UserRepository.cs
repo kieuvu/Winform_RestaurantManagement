@@ -14,8 +14,8 @@ namespace RestaurantManagement.Source.Repositories
             string query = "SELECT * FROM users WHERE username = @username AND password = @password";
 
             QueryParameter parameter = QueryParameter.Builder()
-                                                     .AddParameter("@username", username)
-                                                     .AddParameter("@password", password);
+                                                     .AddParameter("username", username)
+                                                     .AddParameter("password", password);
 
             return DatabaseHelper.ExecuteQuery(query, parameter);
         }
