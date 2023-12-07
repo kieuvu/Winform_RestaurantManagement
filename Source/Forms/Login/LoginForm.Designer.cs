@@ -1,4 +1,4 @@
-﻿namespace RestaurantManagement.Source.Forms
+﻿namespace RestaurantManagement.Source.Forms.Login
 {
     partial class LoginForm
     {

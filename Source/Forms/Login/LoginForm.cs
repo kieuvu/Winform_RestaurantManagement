@@ -1,6 +1,6 @@
 using RestaurantManagement.Source.Services;
 
-namespace RestaurantManagement.Source.Forms
+namespace RestaurantManagement.Source.Forms.Login
 {
     public partial class LoginForm : Form
     {
