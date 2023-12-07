@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using RestaurantManagement.Source.Models;
+using Winform_RestaurantManagement.Source.Repositories;
 
 namespace RestaurantManagement.Source.Services
 {
@@ -16,13 +17,7 @@ namespace RestaurantManagement.Source.Services
         {
             string passwordEncode = new MD5Encoder(password).Encode();
 
-            string query = "SELECT * FROM users WHERE username = @username AND password = @password";
-
-            QueryParameter parameter = QueryParameter.Builder()
-                                                     .AddParameter("@username", username)
-                                                     .AddParameter("@password", passwordEncode);
-
-            DataTable rows = DatabaseUtils.ExecuteQuery(query, parameter);
+            DataTable rows = UserRepository.GetUserInfoByUsernameAndPassword(username, password);
 
             if (rows.Rows.Count > 0)
             {
