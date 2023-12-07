@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RestaurantManagement.Source.Utils;
 
-namespace Winform_RestaurantManagement.Source.Repositories
+namespace RestaurantManagement.Source.Repositories
 {
     public class UserRepository
     {
