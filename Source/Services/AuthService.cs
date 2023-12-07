@@ -18,9 +18,9 @@ namespace RestaurantManagement.Source.Services
 
             string query = "SELECT * FROM users WHERE username = @username AND password = @password";
 
-            QueryParameter parameter = new();
-            parameter.AddParameter("@username", username)
-                     .AddParameter("@password", passwordEncode);
+            QueryParameter parameter = QueryParameter.Builder()
+                                                     .AddParameter("@username", username)
+                                                     .AddParameter("@password", passwordEncode);
 
             DataTable rows = DatabaseUtils.ExecuteQuery(query, parameter);
 

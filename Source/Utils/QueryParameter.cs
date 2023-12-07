@@ -15,6 +15,10 @@ namespace RestaurantManagement.Source.Utils
             this._parameters = new Dictionary<string, object>();
         }
 
+        public static QueryParameter Builder() {
+            return new QueryParameter();
+        }
+
         public QueryParameter AddParameter(string key, string value)
         {
             this._parameters.Add(key, value);
