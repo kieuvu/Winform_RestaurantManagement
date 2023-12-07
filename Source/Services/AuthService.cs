@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using RestaurantManagement.Source.Models;
-using Winform_RestaurantManagement.Source.Repositories;
+using RestaurantManagement.Source.Repositories;
 
 namespace RestaurantManagement.Source.Services
 {
