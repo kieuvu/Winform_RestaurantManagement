@@ -10,7 +10,7 @@ using RestaurantManagement.Source.Configs;
 
 namespace RestaurantManagement.Source.Utils
 {
-    internal class DatabaseUtils
+    internal class DatabaseHelper
     {
         public static DataTable ExecuteQuery(string sqlQuery, QueryParameter? queryParameter = null)
         {

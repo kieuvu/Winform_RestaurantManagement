@@ -9,15 +9,15 @@ namespace RestaurantManagement.Source.Repositories
 {
     public class UserRepository
     {
-        public static DataTable GetUserInfoByUsernameAndPassword(string username, string password) 
-        {   
+        public static DataTable GetUserInfoByUsernameAndPassword(string username, string password)
+        {
             string query = "SELECT * FROM users WHERE username = @username AND password = @password";
 
             QueryParameter parameter = QueryParameter.Builder()
                                                      .AddParameter("@username", username)
                                                      .AddParameter("@password", password);
 
-            return DatabaseUtils.ExecuteQuery(query, parameter);
-        } 
+            return DatabaseHelper.ExecuteQuery(query, parameter);
+        }
     }
 }
