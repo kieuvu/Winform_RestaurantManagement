@@ -14,9 +14,7 @@ namespace RestaurantManagement.Source.Utils
     {
         public static DataTable ExecuteQuery(string sqlQuery, QueryParameter? queryParameter = null)
         {
-            using MySqlConnection connection = DatabaseConfig.GetConnection();
-
-            connection.Open();
+            using MySqlConnection connection = DatabaseConfig.GetConnection(true);
 
             using MySqlCommand sqlCommand = new(sqlQuery, connection);
 

@@ -16,9 +16,12 @@ namespace RestaurantManagement.Source.Configs
         private readonly static string _password = "";
         private readonly static int _port = 3306;
 
-        public static MySqlConnection GetConnection()
+        public static MySqlConnection GetConnection(bool forceOpen = false)
         {
             MySqlConnection connection = new(GetConnectionString());
+
+            if (forceOpen) connection.Open();
+
             return connection;
         }
 
