@@ -28,14 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             groupBox1 = new GroupBox();
             LoginHandlerButton = new Button();
             LoginPassword = new TextBox();
             LoginUsername = new TextBox();
             label2 = new Label();
             label1 = new Label();
+            errorProvider1 = new ErrorProvider(this.components);
+            errorProvider2 = new ErrorProvider(this.components);
             groupBox1.SuspendLayout();
-            SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).BeginInit();
+            this.SuspendLayout();
             // 
             // groupBox1
             // 
@@ -60,7 +65,7 @@
             LoginHandlerButton.TabIndex = 5;
             LoginHandlerButton.Text = "Đăng nhập";
             LoginHandlerButton.UseVisualStyleBackColor = true;
-            LoginHandlerButton.Click += LoginHandlerButton_Click;
+            LoginHandlerButton.Click += this.LoginHandlerButton_Click;
             // 
             // LoginPassword
             // 
@@ -95,21 +100,31 @@
             label1.TabIndex = 0;
             label1.Text = "Tên đăng nhập";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            errorProvider2.ContainerControl = this;
+            // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(344, 181);
-            Controls.Add(groupBox1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximumSize = new Size(360, 220);
-            MinimumSize = new Size(360, 220);
-            Name = "LoginForm";
-            Text = "Vukm";
-            Load += LoginForm_Load;
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.ClientSize = new Size(344, 181);
+            this.Controls.Add(groupBox1);
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximumSize = new Size(360, 220);
+            this.MinimumSize = new Size(360, 220);
+            this.Name = "LoginForm";
+            this.Text = "Vukm";
+            this.Load += this.LoginForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).EndInit();
+            this.ResumeLayout(false);
         }
 
         #endregion
@@ -120,5 +135,7 @@
         private Label label2;
         private Label label1;
         private Button LoginHandlerButton;
+        private ErrorProvider errorProvider1;
+        private ErrorProvider errorProvider2;
     }
 }

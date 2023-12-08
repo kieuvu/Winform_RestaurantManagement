@@ -19,28 +19,23 @@ namespace RestaurantManagement.Source.Services
 
             DataTable rows = UserRepository.GetUserInfoByUsernameAndPassword(username, passwordEncode);
 
-            if (rows.Rows.Count > 0)
-            {
-                DataRow firstRow = rows.Rows[0];
+            if (rows.Rows.Count <= 0)
+                throw new Exception("Sai tên đăng nhập hoặc mật khẩu");
 
-                if (firstRow != null)
-                {
-                    User user = new();
+            DataRow firstRow = rows.Rows[0];
 
-                    if (firstRow.Table.Columns.Contains("username")) 
-                        user.Username = Convert.ToString(firstRow["username"]);
+            User user = new();
 
-                    if (firstRow.Table.Columns.Contains("id")) 
-                        user.Id = Convert.ToInt32(firstRow["id"]);
+            if (firstRow.Table.Columns.Contains("username"))
+                user.Username = Convert.ToString(firstRow["username"]);
 
-                    if (firstRow.Table.Columns.Contains("is_admin"))
-                        user.IsAdmin = Convert.ToBoolean(firstRow["is_admin"]);
+            if (firstRow.Table.Columns.Contains("id"))
+                user.Id = Convert.ToInt32(firstRow["id"]);
 
-                    return "Success";
-                }
-            }
+            if (firstRow.Table.Columns.Contains("is_admin"))
+                user.IsAdmin = Convert.ToBoolean(firstRow["is_admin"]);
 
-            return "User Not Found";
+            return "Success";
         }
     }
 }

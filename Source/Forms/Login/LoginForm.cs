@@ -1,4 +1,6 @@
+﻿using MySql.Data.MySqlClient;
 using RestaurantManagement.Source.Services;
+using RestaurantManagement.Source.Utils;
 
 namespace RestaurantManagement.Source.Forms.Login
 {
@@ -18,9 +20,15 @@ namespace RestaurantManagement.Source.Forms.Login
             string username = LoginUsername.Text;
             string password = LoginPassword.Text;
 
-            string result = AuthService.Login(username, password);
-
-            MessageBox.Show(Text, result);
+            try
+            {
+                LoginFormHelpers.ValidateLoginForm(username, password);
+                string result = AuthService.Login(username, password);
+            }
+            catch (Exception ex)
+            {
+                AlertHelper.Show(ex.Message);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace RestaurantManagement.Source.Utils
 {
     internal class MD5Encoder : IStringEncoder
     {
-        private string ?input;
+        private string? input;
 
         public MD5Encoder()
         {
@@ -23,12 +23,11 @@ namespace RestaurantManagement.Source.Utils
 
         public string Encode()
         {
-            if (this.input is not null)
-            {
-                return CalculateMD5Hash(this.input);
-            }
+            if (this.input is null)
+                throw new Exception("Can't create hash string from null");
 
-            throw new Exception("Can't create hash string from null");
+            return CalculateMD5Hash(this.input);
+
         }
 
         public void SetEncodeString(string input)
