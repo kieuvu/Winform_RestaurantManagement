@@ -13,14 +13,14 @@ namespace RestaurantManagement.Source.Services
 {
     internal class AuthService
     {
-        public static string Login(string username, string password)
+        public static void Login(string username, string password)
         {
             string passwordEncode = new MD5Encoder(password).Encode();
 
             DataTable rows = UserRepository.GetUserInfoByUsernameAndPassword(username, passwordEncode);
 
             if (rows.Rows.Count <= 0)
-                throw new Exception("Sai tên đăng nhập hoặc mật khẩu");
+                throw new Exception("Wrong username or password");
 
             DataRow firstRow = rows.Rows[0];
 
@@ -29,8 +29,6 @@ namespace RestaurantManagement.Source.Services
 
             if (firstRow.Table.Columns.Contains("id"))
                 AuthSession.SetUserId(Convert.ToInt32(firstRow["id"]));
-
-            return "Success";
         }
     }
 }

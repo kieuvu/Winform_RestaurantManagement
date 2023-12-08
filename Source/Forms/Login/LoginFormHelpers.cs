@@ -13,7 +13,7 @@ namespace RestaurantManagement.Source.Forms.Login
         public static void ValidateLoginForm(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-                throw new Exception("Vui lòng nhập tài khoản và mật khẩu");
+                throw new Exception("The username and password fields are required");
         }
     }
 }
