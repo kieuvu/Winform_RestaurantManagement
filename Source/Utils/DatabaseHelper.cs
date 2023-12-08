@@ -18,15 +18,7 @@ namespace RestaurantManagement.Source.Utils
 
             using MySqlCommand sqlCommand = new(sqlQuery, connection);
 
-            if (queryParameter != null)
-            {
-                foreach (var parameter in queryParameter.GetParameter())
-                {
-                    sqlCommand.Parameters.AddWithValue(parameter.Key, parameter.Value);
-                }
-            }
-
-            string rawSqlQuery = sqlCommand.CommandText;
+            if (queryParameter != null) sqlCommand.Parameters.AddRange(queryParameter.GetParameter());
 
             using MySqlDataAdapter adapter = new(sqlCommand);
 

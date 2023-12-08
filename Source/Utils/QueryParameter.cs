@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +11,11 @@ namespace RestaurantManagement.Source.Utils
 {
     internal class QueryParameter
     {
-        private readonly Dictionary<string, object> _parameters;
+        private readonly List<MySqlParameter> _parameters;
 
         public QueryParameter()
         {
-            this._parameters = new Dictionary<string, object>();
+            this._parameters = new List<MySqlParameter>();
         }
 
         public static QueryParameter Builder() 
@@ -22,13 +25,13 @@ namespace RestaurantManagement.Source.Utils
 
         public QueryParameter AddParameter(string key, string value)
         {
-            this._parameters.Add("@" + key, value);
+            this._parameters.Add(new MySqlParameter("@" + key, value));
             return this;
         }
 
-        public Dictionary<string, object> GetParameter()
+        public MySqlParameter[] GetParameter()
         {
-            return this._parameters;
+            return this._parameters.ToArray<MySqlParameter>();
         }
     }
 }

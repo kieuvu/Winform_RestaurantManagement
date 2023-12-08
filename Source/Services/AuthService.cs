@@ -17,7 +17,7 @@ namespace RestaurantManagement.Source.Services
         {
             string passwordEncode = new MD5Encoder(password).Encode();
 
-            DataTable rows = UserRepository.GetUserInfoByUsernameAndPassword(username, password);
+            DataTable rows = UserRepository.GetUserInfoByUsernameAndPassword(username, passwordEncode);
 
             if (rows.Rows.Count > 0)
             {
