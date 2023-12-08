@@ -24,16 +24,11 @@ namespace RestaurantManagement.Source.Services
 
             DataRow firstRow = rows.Rows[0];
 
-            User user = new();
-
             if (firstRow.Table.Columns.Contains("username"))
-                user.Username = Convert.ToString(firstRow["username"]);
+                AuthSession.SetUserName(Convert.ToString(firstRow["username"]));
 
             if (firstRow.Table.Columns.Contains("id"))
-                user.Id = Convert.ToInt32(firstRow["id"]);
-
-            if (firstRow.Table.Columns.Contains("is_admin"))
-                user.IsAdmin = Convert.ToBoolean(firstRow["is_admin"]);
+                AuthSession.SetUserId(Convert.ToInt32(firstRow["id"]));
 
             return "Success";
         }
