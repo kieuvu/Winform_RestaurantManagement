@@ -1,4 +1,5 @@
 using RestaurantManagement.Source.Forms.Login;
+using RestaurantManagement.Source.Forms.Staff;
 
 namespace RestaurantManagement
 {
@@ -13,7 +14,8 @@ namespace RestaurantManagement
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoginForm());
+            // Application.Run(new LoginForm());
+            Application.Run(new StaffForm());
         }
     }
 }

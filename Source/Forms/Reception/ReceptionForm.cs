@@ -1,4 +1,5 @@
-﻿using RestaurantManagement.Source.Models;
+﻿using RestaurantManagement.Source.Forms.Staff;
+using RestaurantManagement.Source.Models;
 using RestaurantManagement.Source.Utils;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,16 @@ namespace RestaurantManagement.Source.Forms.Reception
         private void ReceptionForm_Load(object sender, EventArgs e)
         {
             AlertHelper.Show(AuthSession.Username);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Form staff = new StaffForm();
+            staff.ShowDialog();
+
+            this.Show();
         }
     }
 }

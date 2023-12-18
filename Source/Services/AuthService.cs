@@ -25,7 +25,7 @@ namespace RestaurantManagement.Source.Services
             DataRow firstRow = rows.Rows[0];
 
             if (firstRow.Table.Columns.Contains("username"))
-                AuthSession.SetUserName(Convert.ToString(firstRow["username"]));
+                AuthSession.SetUserName(Convert.ToString(firstRow["username"]) ?? "");
 
             if (firstRow.Table.Columns.Contains("id"))
                 AuthSession.SetUserId(Convert.ToInt32(firstRow["id"]));

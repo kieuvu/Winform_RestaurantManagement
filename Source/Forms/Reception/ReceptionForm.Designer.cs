@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            button1 = new Button();
             this.SuspendLayout();
+            // 
+            // button1
+            // 
+            button1.Cursor = Cursors.Hand;
+            button1.Location = new Point(12, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(234, 91);
+            button1.TabIndex = 0;
+            button1.Text = "Quản lý nhân viên";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += this.button1_Click;
             // 
             // ReceptionForm
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new Size(800, 450);
+            this.Controls.Add(button1);
             this.Name = "ReceptionForm";
             this.Text = "ReceptionForm";
             this.Load += this.ReceptionForm_Load;
@@ -42,5 +55,7 @@
         }
 
         #endregion
+
+        private Button button1;
     }
 }

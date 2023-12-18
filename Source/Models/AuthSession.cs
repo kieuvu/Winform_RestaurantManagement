@@ -8,10 +8,10 @@ namespace RestaurantManagement.Source.Models
 {
     internal class AuthSession
     {
-        public static int Id { get; private set; }
-        public static string? Username { get; private set; }
+        public static int Id { get; private set; } = 0;
+        public static string Username { get; private set; } = "";
 
-        public static void SetUserName(string? username)
+        public static void SetUserName(string username)
         {
             Username = username;
         }
