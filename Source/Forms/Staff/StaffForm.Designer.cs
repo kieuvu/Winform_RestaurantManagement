@@ -269,9 +269,10 @@
             // 
             // listView1
             // 
-            listView1.Location = new Point(6, 22);
+            listView1.Dock = DockStyle.Fill;
+            listView1.Location = new Point(3, 19);
             listView1.Name = "listView1";
-            listView1.Size = new Size(814, 559);
+            listView1.Size = new Size(817, 565);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;

@@ -30,8 +30,8 @@ namespace RestaurantManagement.Source.Repositories
         }
 
         public static int AddStaff(string name, int gender, string dob,
-                                    string joinDate, string email, string phone,
-                                    string address, int position, int salary)
+                                   string joinDate, string email, string phone,
+                                   string address, int position, int salary)
         {
             string query = "INSERT INTO staffs (`name`, `dob`, `gender`, `position_id`, `salary`, `join_date`, `phone`, `address`, `email`) "
                          + "VALUES (@name, @dob, @gender, @position, @salary, @joinDate, @phone, @address, @email)";
