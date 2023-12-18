@@ -49,9 +49,10 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
+            groupBox2 = new GroupBox();
+            listView1 = new ListView();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -76,18 +77,20 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(745, 12);
+            groupBox1.Dock = DockStyle.Right;
+            groupBox1.Location = new Point(823, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(314, 565);
+            groupBox1.Size = new Size(314, 587);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thêm/Sửa nhân viên";
             // 
             // button1
             // 
-            button1.Location = new Point(6, 519);
+            button1.Dock = DockStyle.Bottom;
+            button1.Location = new Point(3, 544);
             button1.Name = "button1";
-            button1.Size = new Size(148, 40);
+            button1.Size = new Size(308, 40);
             button1.TabIndex = 23;
             button1.Text = "Thêm";
             button1.UseVisualStyleBackColor = true;
@@ -253,27 +256,38 @@
             label1.TabIndex = 0;
             label1.Text = "Tên nhân viên";
             // 
-            // dataGridView1
+            // groupBox2
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 12);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(727, 565);
-            dataGridView1.TabIndex = 1;
+            groupBox2.Controls.Add(listView1);
+            groupBox2.Dock = DockStyle.Fill;
+            groupBox2.Location = new Point(0, 0);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(823, 587);
+            groupBox2.TabIndex = 2;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Danh sách";
+            // 
+            // listView1
+            // 
+            listView1.Location = new Point(6, 22);
+            listView1.Name = "listView1";
+            listView1.Size = new Size(814, 559);
+            listView1.TabIndex = 0;
+            listView1.UseCompatibleStateImageBehavior = false;
+            listView1.View = View.Details;
             // 
             // StaffForm
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(1071, 589);
-            this.Controls.Add(dataGridView1);
+            this.ClientSize = new Size(1137, 587);
+            this.Controls.Add(groupBox2);
             this.Controls.Add(groupBox1);
             this.Name = "StaffForm";
             this.Text = "StaffForm";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
@@ -300,6 +314,7 @@
         private Label label8;
         private Button button1;
         private ComboBox comboBox1;
-        private DataGridView dataGridView1;
+        private GroupBox groupBox2;
+        private ListView listView1;
     }
 }

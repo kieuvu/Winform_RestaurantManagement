@@ -23,7 +23,7 @@ namespace RestaurantManagement.Source.Utils
             return new QueryParameter();
         }
 
-        public QueryParameter AddParameter(string key, string value)
+        public QueryParameter AddParameter(string key, object value)
         {
             this._parameters.Add(new MySqlParameter("@" + key, value));
             return this;

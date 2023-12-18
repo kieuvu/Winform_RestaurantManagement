@@ -24,19 +24,30 @@ namespace RestaurantManagement.Source.Repositories
         {
             string query = "SELECT staffs.*, positions.name AS position_name "
                          + "FROM staffs INNER JOIN positions "
-            + "ON staffs.position_id = positions.id";
+                         + "ON staffs.position_id = positions.id";
+
             return DatabaseHelper.ExecuteQuery(query);
         }
 
-        public static bool AddStaff()
+        public static int AddStaff(string name, int gender, string dob,
+                                    string joinDate, string email, string phone,
+                                    string address, int position, int salary)
         {
             string query = "INSERT INTO staffs (`name`, `dob`, `gender`, `position_id`, `salary`, `join_date`, `phone`, `address`, `email`) "
                          + "VALUES (@name, @dob, @gender, @position, @salary, @joinDate, @phone, @address, @email)";
 
-           // QueryParameter parameter = QueryParameter.Builder()
-             //                                        .AddParameter("username", username)
-               //                                      .AddParameter("password", password);
-            return true;
+            QueryParameter parameter = QueryParameter.Builder()
+                                                     .AddParameter("name", name)
+                                                     .AddParameter("gender", gender)
+                                                     .AddParameter("dob", dob)
+                                                     .AddParameter("joinDate", joinDate)
+                                                     .AddParameter("email", email)
+                                                     .AddParameter("phone", phone)
+                                                     .AddParameter("address", address)
+                                                     .AddParameter("position", position)
+                                                     .AddParameter("salary", salary);
+
+            return DatabaseHelper.ExecuteNonQuery(query, parameter);
         }
     }
 }

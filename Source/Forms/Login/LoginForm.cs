@@ -23,7 +23,6 @@ namespace RestaurantManagement.Source.Forms.Login
 
             try
             {
-                LoginFormHelpers.ValidateLoginForm(username, password);
                 AuthService.Login(username, password);
 
                 this.Hide();

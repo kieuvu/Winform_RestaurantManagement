@@ -28,5 +28,18 @@ namespace RestaurantManagement.Source.Utils
 
             return dataTable;
         }
+
+        public static int ExecuteNonQuery(string sqlQuery, QueryParameter? queryParameter = null)
+        {
+            using MySqlConnection connection = DatabaseConfig.GetConnection(true);
+
+            using MySqlCommand sqlCommand = new(sqlQuery, connection);
+
+            if (queryParameter != null) sqlCommand.Parameters.AddRange(queryParameter.GetParameter());
+
+            int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+            return rowsAffected;
+        }
     }
 }

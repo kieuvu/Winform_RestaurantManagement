@@ -1,4 +1,5 @@
-﻿using RestaurantManagement.Source.Services;
+﻿using RestaurantManagement.Source.Forms.Login;
+using RestaurantManagement.Source.Services;
 using RestaurantManagement.Source.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,6 @@ namespace RestaurantManagement.Source.Forms.Staff
 {
     public partial class StaffForm : Form
     {
-        private static bool isStaffPositionGot = false;
-
         public StaffForm()
         {
             InitializeComponent();
@@ -25,7 +24,7 @@ namespace RestaurantManagement.Source.Forms.Staff
         private void InitForm()
         {
             this.GetListStaffPosition();
-           // this.GetListStaffs();
+            this.GetListStaffs();
         }
 
         private void GetListStaffPosition()
@@ -46,45 +45,87 @@ namespace RestaurantManagement.Source.Forms.Staff
 
             if (dataSource.Rows.Count > 0)
             {
-                dataGridView1.DataSource = dataSource;
-                dataGridView1.CellFormatting += this.DataGridView1_CellFormatting;
+                listView1.Items.Clear();
+                listView1.Columns.Clear();
 
-                dataGridView1.Columns["position_id"].Visible = false;
-                dataGridView1.Columns["id"].Visible = false;
+                Dictionary<string, (string DisplayName, int Width)> columnInfoDictionary = new()
+                {
+                    { "name", ("Tên nhân viên", 150) },
+                    { "dob", ("Ngày sinh", 120) },
+                    { "gender", ("Giới tính", 80) },
+                    { "salary", ("Lương", 120) },
+                    { "join_date", ("Ngày vào làm", 120) },
+                    { "phone", ("Số điện thoại", 120) },
+                    { "address", ("Nơi ở", 150) },
+                    { "email", ("Email", 150) },
+                    { "position_name", ("Vị trí", 120) }
+                };
 
-                dataGridView1.Columns["name"].HeaderText = "Tên nhân viên";
-                dataGridView1.Columns["dob"].HeaderText = "Ngày sinh";
-                dataGridView1.Columns["gender"].HeaderText = "Giới tính";
-                dataGridView1.Columns["salary"].HeaderText = "Lương";
-                dataGridView1.Columns["join_date"].HeaderText = "Ngày vào làm";
-                dataGridView1.Columns["phone"].HeaderText = "Số điện thoại";
-                dataGridView1.Columns["address"].HeaderText = "Nơi ở";
-                dataGridView1.Columns["email"].HeaderText = "Email";
-                dataGridView1.Columns["position_name"].HeaderText = "Vị trí";
+                listView1.Columns.Add("STT");
+
+                foreach (KeyValuePair<string, (string DisplayName, int Width)> columnInfo in columnInfoDictionary)
+                {
+
+                    if (!dataSource.Columns.Contains(columnInfo.Key)) continue;
+                    listView1.Columns.Add(columnInfo.Value.DisplayName, columnInfo.Value.Width);
+                }
+
+                foreach (DataRow row in dataSource.Rows)
+                {
+                    ListViewItem item = new(row[0].ToString());
+
+                    for (int i = 1; i < dataSource.Columns.Count; i++)
+                    {
+                        if (dataSource.Columns[i].ColumnName == "position_id") continue;
+
+                        if (dataSource.Columns[i].ColumnName == "gender")
+                        {
+                            int genderValue = Convert.ToInt32(row[i]);
+                            item.SubItems.Add((genderValue == 1) ? "Nữ" : ((genderValue == 2) ? "Nam" : "Khác"));
+                        }
+                        else
+                        {
+                            item.SubItems.Add(row[i].ToString());
+                        }
+                    }
+
+                    listView1.Items.Add(item);
+                }
             }
         }
 
-        private void DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridView1.Columns["gender"].Index && e.Value != null)
-            {
-                int genderValue = Convert.ToInt32(e.Value);
-                e.Value = (genderValue == 1) ? "Nữ" : ((genderValue == 2) ? "Nam" : "Khác");
-                e.FormattingApplied = true;
-            }
-        }
         private void button1_Click(object sender, EventArgs e)
         {
-            string name = textBox6.Text;
-            int gender = radioButton1.Checked ? 2 : 1;
-            string dob = dateTimePicker1.Value.ToString("yyyy-MM-dd");
-            string joinDate = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-            string email = textBox1.Text;
-            string phone= textBox2.Text;
-            string address= textBox3.Text;
-            int position = Convert.ToInt32(comboBox1.SelectedValue);
-            MessageBox.Show(position.ToString());
-           // int salary = Convert.ToInt32(textBox5.Text);
+            try
+            {
+                string name = textBox6.Text;
+                string email = textBox1.Text;
+                string phone = textBox2.Text;
+                string address = textBox3.Text;
+                string salary = textBox5.Text;
+                int gender = radioButton1.Checked ? 2 : 1;
+                int position = Convert.ToInt32(comboBox1.SelectedValue);
+                string dob = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+                string joinDate = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+
+                int result = StaffService.CreateStaff(name, gender, dob,
+                                                      joinDate, email, phone,
+                                                      address, position, salary);
+
+                if (result > 0)
+                {
+                    this.GetListStaffs();
+                    textBox1.Text = "";
+                    textBox2.Text = "";
+                    textBox3.Text = "";
+                    textBox5.Text = "";
+                    textBox6.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                AlertHelper.Show(ex.Message);
+            }
         }
     }
 }
