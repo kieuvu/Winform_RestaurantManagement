@@ -270,6 +270,8 @@
             // listView1
             // 
             listView1.Dock = DockStyle.Fill;
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
             listView1.Location = new Point(3, 19);
             listView1.Name = "listView1";
             listView1.Size = new Size(817, 565);
