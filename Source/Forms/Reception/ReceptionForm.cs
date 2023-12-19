@@ -1,4 +1,5 @@
 ﻿using RestaurantManagement.Source.Forms.Staff;
+using RestaurantManagement.Source.Forms.Table;
 using RestaurantManagement.Source.Models;
 using RestaurantManagement.Source.Utils;
 using System;
@@ -31,6 +32,16 @@ namespace RestaurantManagement.Source.Forms.Reception
 
             Form staff = new StaffForm();
             staff.ShowDialog();
+
+            this.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Form table = new TableForm();
+            table.ShowDialog();
 
             this.Show();
         }

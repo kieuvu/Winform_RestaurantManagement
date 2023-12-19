@@ -146,8 +146,8 @@ namespace RestaurantManagement.Source.Forms.Staff
 
                     if (success > 0)
                     {
-                        listView1.Items.Remove(selectedItem);
                         AlertHelper.Show("Xóa thành công.");
+                        this.GetListStaffs();
                     }
                 }
             }

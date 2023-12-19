@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             button1 = new Button();
+            button2 = new Button();
             this.SuspendLayout();
             // 
             // button1
@@ -42,11 +43,23 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += this.button1_Click;
             // 
+            // button2
+            // 
+            button2.Cursor = Cursors.Hand;
+            button2.Location = new Point(252, 12);
+            button2.Name = "button2";
+            button2.Size = new Size(234, 91);
+            button2.TabIndex = 1;
+            button2.Text = "Quản lý bàn ăn";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += this.button2_Click;
+            // 
             // ReceptionForm
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new Size(800, 450);
+            this.Controls.Add(button2);
             this.Controls.Add(button1);
             this.Name = "ReceptionForm";
             this.Text = "ReceptionForm";
@@ -57,5 +70,6 @@
         #endregion
 
         private Button button1;
+        private Button button2;
     }
 }
