@@ -21,8 +21,8 @@ namespace RestaurantManagement.Source.Services
         }
 
         public static int CreateStaff(string name, int gender, string dob, 
-                                    string joinDate, string email, string phone, 
-                                    string address, int position, string salary)
+                                      string joinDate, string email, string phone, 
+                                      string address, int position, string salary)
         {
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
                 throw new Exception("Vui lòng nhập tên nhân viên");
