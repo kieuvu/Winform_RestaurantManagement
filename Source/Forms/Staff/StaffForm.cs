@@ -50,6 +50,7 @@ namespace RestaurantManagement.Source.Forms.Staff
 
                 Dictionary<string, (string DisplayName, int Width)> columnInfoDictionary = new()
                 {
+                    { "id", ("ID", 100) },
                     { "name", ("Tên nhân viên", 150) },
                     { "dob", ("Ngày sinh", 120) },
                     { "gender", ("Giới tính", 80) },
@@ -61,8 +62,6 @@ namespace RestaurantManagement.Source.Forms.Staff
                     { "position_name", ("Vị trí", 120) }
                 };
 
-                listView1.Columns.Add("STT");
-
                 foreach (KeyValuePair<string, (string DisplayName, int Width)> columnInfo in columnInfoDictionary)
                 {
 
@@ -72,13 +71,15 @@ namespace RestaurantManagement.Source.Forms.Staff
 
                 foreach (DataRow row in dataSource.Rows)
                 {
-                    ListViewItem item = new(row[0].ToString());
+                    ListViewItem item = new(StringHelper.PadNumberWithZeros(row[0]));
 
                     for (int i = 1; i < dataSource.Columns.Count; i++)
                     {
-                        if (dataSource.Columns[i].ColumnName == "position_id") continue;
+                        string key = dataSource.Columns[i].ColumnName;
 
-                        if (dataSource.Columns[i].ColumnName == "gender")
+                        if (key == "position_id") continue;
+
+                        if (key == "gender")
                         {
                             int genderValue = Convert.ToInt32(row[i]);
                             item.SubItems.Add((genderValue == 1) ? "Nữ" : ((genderValue == 2) ? "Nam" : "Khác"));
@@ -114,6 +115,7 @@ namespace RestaurantManagement.Source.Forms.Staff
 
                 if (result > 0)
                 {
+                    AlertHelper.Show("Thêm thành công");
                     this.GetListStaffs();
                     textBox1.Text = "";
                     textBox2.Text = "";
@@ -125,6 +127,33 @@ namespace RestaurantManagement.Source.Forms.Staff
             catch (Exception ex)
             {
                 AlertHelper.Show(ex.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listView1.SelectedItems[0];
+
+                string selectedId = selectedItem.SubItems[0].Text;
+
+                DialogResult result = MessageBox.Show($"Bạn có muốn xóa nhân viên {StringHelper.PadNumberWithZeros(selectedId)}?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    int success = StaffService.DeleteStaffById(Convert.ToInt32(selectedId));
+
+                    if (success > 0)
+                    {
+                        listView1.Items.Remove(selectedItem);
+                        AlertHelper.Show("Xóa thành công.");
+                    }
+                }
+            }
+            else
+            {
+                AlertHelper.Show("Vui lòng chọn nhân viên muốn xóa");
             }
         }
     }

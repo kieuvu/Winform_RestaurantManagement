@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Xml.Linq;
 
 namespace RestaurantManagement.Source.Services
 {
@@ -43,6 +45,11 @@ namespace RestaurantManagement.Source.Services
             return StaffRepository.AddStaff(name, gender, dob, 
                                             joinDate, email, phone, 
                                             address, position, parsedSalary);
+        }
+
+        public static int DeleteStaffById(int staffId)
+        {
+            return StaffRepository.DeleteStaffById(staffId);
         }
     }
 }

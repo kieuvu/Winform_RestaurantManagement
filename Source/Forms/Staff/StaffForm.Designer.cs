@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            button2 = new Button();
             button1 = new Button();
             comboBox1 = new ComboBox();
             textBox5 = new TextBox();
@@ -57,6 +58,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(comboBox1);
             groupBox1.Controls.Add(textBox5);
@@ -85,8 +87,21 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Thêm/Sửa nhân viên";
             // 
+            // button2
+            // 
+            button2.Cursor = Cursors.Hand;
+            button2.Dock = DockStyle.Bottom;
+            button2.Location = new Point(3, 504);
+            button2.Name = "button2";
+            button2.Size = new Size(308, 40);
+            button2.TabIndex = 24;
+            button2.Text = "Xóa Nhân Viên";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += this.button2_Click;
+            // 
             // button1
             // 
+            button1.Cursor = Cursors.Hand;
             button1.Dock = DockStyle.Bottom;
             button1.Location = new Point(3, 544);
             button1.Name = "button1";
@@ -319,5 +334,6 @@
         private ComboBox comboBox1;
         private GroupBox groupBox2;
         private ListView listView1;
+        private Button button2;
     }
 }

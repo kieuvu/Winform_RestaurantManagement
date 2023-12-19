@@ -9,6 +9,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Reflection;
 
 namespace RestaurantManagement.Source.Repositories
 {
@@ -46,6 +47,15 @@ namespace RestaurantManagement.Source.Repositories
                                                      .AddParameter("address", address)
                                                      .AddParameter("position", position)
                                                      .AddParameter("salary", salary);
+
+            return DatabaseHelper.ExecuteNonQuery(query, parameter);
+        }
+
+        public static int DeleteStaffById(int id)
+        {
+            string query = "DELETE FROM `staffs` WHERE `staffs`.`id` = @id";
+
+            QueryParameter parameter = QueryParameter.Builder().AddParameter("id", id);
 
             return DatabaseHelper.ExecuteNonQuery(query, parameter);
         }
