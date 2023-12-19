@@ -1,4 +1,5 @@
-﻿using RestaurantManagement.Source.Services;
+﻿using MySqlX.XDevAPI.Common;
+using RestaurantManagement.Source.Services;
 using RestaurantManagement.Source.Utils;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,19 @@ namespace RestaurantManagement.Source.Forms.Table
 
         private void InitForm()
         {
+            this.InitCombobox();
             this.GetListTables();
+        }
+
+        private void InitCombobox()
+        {
+            comboBox1.Items.AddRange(new object[] { 1, 2, 3, 4 });
+
+            comboBox1.SelectedIndex = 0;
+
+            comboBox2.Items.AddRange(new object[] { 2, 4, 6, 8, 10 });
+
+            comboBox2.SelectedIndex = 0;
         }
 
         private void GetListTables()
@@ -65,7 +78,24 @@ namespace RestaurantManagement.Source.Forms.Table
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string price = textBox1.Text;
+                int floor = Convert.ToInt32(comboBox1.SelectedItem);
+                int quantity = Convert.ToInt32(comboBox2.SelectedItem);
 
+                int result = TableService.CreateTable(price, quantity, floor);
+
+                if (result > 0)
+                {
+                    AlertHelper.Show("Thêm thành công");
+                    this.GetListTables();
+                }
+            }
+            catch (Exception ex) 
+            {
+                AlertHelper.Show(ex.Message);
+            }
         }
     }
 }
