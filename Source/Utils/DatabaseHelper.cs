@@ -14,7 +14,11 @@ namespace RestaurantManagement.Source.Utils
     {
         public static DataTable ExecuteQuery(string sqlQuery, QueryParameter? queryParameter = null)
         {
-            MySqlCommand sqlCommand = this.GetCommand(sqlQuery, queryParameter);
+            using MySqlConnection connection = DatabaseConfig.GetConnection(true);
+
+            using MySqlCommand sqlCommand = new(sqlQuery, connection);
+
+            if (queryParameter != null) sqlCommand.Parameters.AddRange(queryParameter.GetParameter());
 
             using MySqlDataAdapter adapter = new(sqlCommand);
 
@@ -27,22 +31,15 @@ namespace RestaurantManagement.Source.Utils
 
         public static int ExecuteNonQuery(string sqlQuery, QueryParameter? queryParameter = null)
         {
-            MySqlCommand sqlCommand = this.GetCommand(sqlQuery, queryParameter);
-
-            int rowsAffected = sqlCommand.ExecuteNonQuery();
-
-            return rowsAffected;
-        }
-
-        private static MySqlCommand GetCommand(string sqlQuery, QueryParameter? queryParameter = null) 
-        {
             using MySqlConnection connection = DatabaseConfig.GetConnection(true);
 
             using MySqlCommand sqlCommand = new(sqlQuery, connection);
 
             if (queryParameter != null) sqlCommand.Parameters.AddRange(queryParameter.GetParameter());
 
-            return sqlCommand;
+            int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+            return rowsAffected;
         }
     }
 }
