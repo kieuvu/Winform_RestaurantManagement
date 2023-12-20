@@ -84,6 +84,10 @@ namespace RestaurantManagement.Source.Forms.Staff
                             int genderValue = Convert.ToInt32(row[i]);
                             item.SubItems.Add((genderValue == 1) ? "Nữ" : ((genderValue == 2) ? "Nam" : "Khác"));
                         }
+                        else if (key == "salary")
+                        {
+                            item.SubItems.Add(StringHelper.ConvertToMoney(row[i].ToString()));
+                        }
                         else
                         {
                             item.SubItems.Add(row[i].ToString());

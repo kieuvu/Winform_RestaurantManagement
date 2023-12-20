@@ -68,7 +68,16 @@ namespace RestaurantManagement.Source.Forms.Table
 
                     for (int i = 1; i < dataSource.Columns.Count; i++)
                     {
-                        item.SubItems.Add(row[i].ToString());
+                        string key = dataSource.Columns[i].ColumnName;
+
+                        if (key == "price")
+                        {
+                            item.SubItems.Add(StringHelper.ConvertToMoney(row[i].ToString()));
+                        }
+                        else
+                        {
+                            item.SubItems.Add(row[i].ToString());
+                        }
                     }
 
                     listView1.Items.Add(item);
