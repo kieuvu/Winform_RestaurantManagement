@@ -1,5 +1,4 @@
-﻿using MySqlX.XDevAPI.Common;
-using RestaurantManagement.Source.Services;
+﻿using RestaurantManagement.Source.Services;
 using RestaurantManagement.Source.Utils;
 using System;
 using System.Collections.Generic;
@@ -11,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RestaurantManagement.Source.Forms.Table
+namespace RestaurantManagement.Source.Forms.Food
 {
-    public partial class TableForm : Form
+    public partial class FoodForm : Form
     {
-        public TableForm()
+        public FoodForm()
         {
             InitializeComponent();
             this.InitForm();
@@ -23,24 +22,38 @@ namespace RestaurantManagement.Source.Forms.Table
 
         private void InitForm()
         {
-            this.InitCombobox();
-            this.GetListTables();
+            this.GetListFoods();
+            this.GetListCategory();
+            this.GetListUnit();
         }
 
-        private void InitCombobox()
+        private void GetListUnit()
         {
-            comboBox1.Items.AddRange(new object[] { 1, 2, 3, 4 });
+            DataTable dataSource = FoodService.GetListUnit();
 
-            comboBox1.SelectedIndex = 0;
-
-            comboBox2.Items.AddRange(new object[] { 2, 4, 6, 8, 10 });
-
-            comboBox2.SelectedIndex = 0;
+            if (dataSource.Rows.Count > 0)
+            {
+                comboBox1.DataSource = dataSource;
+                comboBox1.DisplayMember = "name";
+                comboBox1.ValueMember = "id";
+            }
         }
 
-        private void GetListTables()
+        private void GetListCategory()
         {
-            DataTable dataSource = TableService.GetListTables();
+            DataTable dataSource = FoodService.GetListCategory();
+
+            if (dataSource.Rows.Count > 0)
+            {
+                comboBox2.DataSource = dataSource;
+                comboBox2.DisplayMember = "name";
+                comboBox2.ValueMember = "id";
+            }
+        }
+
+        private void GetListFoods()
+        {
+            DataTable dataSource = FoodService.GetListFoods();
 
             if (dataSource.Rows.Count > 0)
             {
@@ -50,9 +63,10 @@ namespace RestaurantManagement.Source.Forms.Table
                 Dictionary<string, (string DisplayName, int Width)> columnInfoDictionary = new()
                 {
                     { "id", ("ID", 100) },
-                    { "quantity", ("Số người", 100) },
-                    { "price", ("Giá/Giờ", 100) },
-                    { "floor", ("Tầng", 100) },       
+                    { "name", ("Tên món ăn", 100) },
+                    { "price", ("Giá", 100) },
+                    { "category_name", ("Loại", 100) },
+                    { "unit_name", ("Đơn vị", 100) },
                 };
 
                 foreach (KeyValuePair<string, (string DisplayName, int Width)> columnInfo in columnInfoDictionary)
@@ -68,6 +82,10 @@ namespace RestaurantManagement.Source.Forms.Table
                     for (int i = 1; i < dataSource.Columns.Count; i++)
                     {
                         string key = dataSource.Columns[i].ColumnName;
+
+                        List<string> avoidDisplay = new() { "unit_id", "category_id" };
+
+                        if (avoidDisplay.Contains(key)) continue;
 
                         if (key == "price")
                         {
@@ -86,24 +104,7 @@ namespace RestaurantManagement.Source.Forms.Table
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string price = textBox1.Text;
-                int floor = Convert.ToInt32(comboBox1.SelectedItem);
-                int quantity = Convert.ToInt32(comboBox2.SelectedItem);
 
-                int result = TableService.CreateTable(price, quantity, floor);
-
-                if (result > 0)
-                {
-                    AlertHelper.Show("Thêm thành công");
-                    this.GetListTables();
-                }
-            }
-            catch (Exception ex) 
-            {
-                AlertHelper.Show(ex.Message);
-            }
         }
     }
 }

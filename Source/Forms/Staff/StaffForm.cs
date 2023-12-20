@@ -64,7 +64,6 @@ namespace RestaurantManagement.Source.Forms.Staff
 
                 foreach (KeyValuePair<string, (string DisplayName, int Width)> columnInfo in columnInfoDictionary)
                 {
-
                     if (!dataSource.Columns.Contains(columnInfo.Key)) continue;
                     listView1.Columns.Add(columnInfo.Value.DisplayName, columnInfo.Value.Width);
                 }
