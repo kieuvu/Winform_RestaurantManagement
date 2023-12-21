@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             groupBox1 = new GroupBox();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
             LoginHandlerButton = new Button();
             LoginPassword = new TextBox();
             LoginUsername = new TextBox();
@@ -44,6 +46,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(radioButton2);
+            groupBox1.Controls.Add(radioButton1);
             groupBox1.Controls.Add(LoginHandlerButton);
             groupBox1.Controls.Add(LoginPassword);
             groupBox1.Controls.Add(LoginUsername);
@@ -55,6 +59,29 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Đăng nhập";
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(97, 116);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(79, 19);
+            radioButton2.TabIndex = 7;
+            radioButton2.Text = "Nhân viên";
+            radioButton2.UseVisualStyleBackColor = true;
+            radioButton2.CheckedChanged += this.radioButton2_CheckedChanged;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
+            radioButton1.Location = new Point(16, 116);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(66, 19);
+            radioButton1.TabIndex = 6;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Quản lý";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
             // LoginHandlerButton
             // 
@@ -118,6 +145,7 @@
             this.MaximumSize = new Size(360, 220);
             this.MinimumSize = new Size(360, 220);
             this.Name = "LoginForm";
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Vukm";
             this.Load += this.LoginForm_Load;
             groupBox1.ResumeLayout(false);
@@ -137,5 +165,7 @@
         private Button LoginHandlerButton;
         private ErrorProvider errorProvider1;
         private ErrorProvider errorProvider2;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
     }
 }

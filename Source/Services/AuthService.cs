@@ -8,12 +8,34 @@ using System.Threading.Tasks;
 using System.Data;
 using RestaurantManagement.Source.Models;
 using RestaurantManagement.Source.Repositories;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace RestaurantManagement.Source.Services
 {
     internal class AuthService
     {
-        public static void Login(string username, string password)
+        public static int LoginStaff(string staffId)
+        {
+            if (string.IsNullOrWhiteSpace(staffId) || string.IsNullOrEmpty(staffId))
+                throw new Exception("Vui lòng nhập tên tài khoản");
+            else if (staffId.Length != 6)
+                throw new Exception("Vui lòng nhập tên tài khoản gồm 6 ký tự");
+
+            DataTable rows = StaffRepository.GetStaffById(Convert.ToInt32(staffId));
+
+            if (rows.Rows.Count <= 0)
+                throw new Exception($"Nhân viên {staffId} không tồn tại");
+
+            DataRow firstRow = rows.Rows[0];
+
+            AuthSession.SetUserName(Convert.ToString(firstRow["name"]) ?? "");
+            AuthSession.SetUserId(Convert.ToInt32(firstRow["id"]));
+            AuthSession.SetRole(AuthSession.STAFF);
+
+            return 1;
+        }
+
+        public static void LoginAdmin(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                 throw new Exception("Vui lòng nhập tên tài khoản và mật khẩu");
@@ -27,11 +49,9 @@ namespace RestaurantManagement.Source.Services
 
             DataRow firstRow = rows.Rows[0];
 
-            if (firstRow.Table.Columns.Contains("username"))
-                AuthSession.SetUserName(Convert.ToString(firstRow["username"]) ?? "");
-
-            if (firstRow.Table.Columns.Contains("id"))
-                AuthSession.SetUserId(Convert.ToInt32(firstRow["id"]));
+            AuthSession.SetUserName(Convert.ToString(firstRow["username"]) ?? "");
+            AuthSession.SetUserId(Convert.ToInt32(firstRow["id"]));
+            AuthSession.SetRole(AuthSession.ADMIN);
         }
     }
 }

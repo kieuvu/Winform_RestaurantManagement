@@ -23,18 +23,47 @@ namespace RestaurantManagement.Source.Forms.Login
 
             try
             {
-                AuthService.Login(username, password);
+                if (radioButton1.Checked)
+                {
+                    AuthService.LoginAdmin(username, password);
 
-                this.Hide();
+                    this.Hide();
 
-                Form receptionForm = new ReceptionForm();
-                receptionForm.ShowDialog();
+                    Form receptionForm = new ReceptionForm();
+                    receptionForm.ShowDialog();
+
+                }
+                else
+                {
+                    AuthService.LoginStaff(username);
+
+                    this.Hide();
+
+                    Form receptionForm = new ReceptionForm();
+                    receptionForm.ShowDialog();
+                }
 
                 this.Show();
             }
             catch (Exception ex)
             {
                 AlertHelper.Show(ex.Message);
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
+            {
+                LoginPassword.Enabled = false;
+                LoginPassword.BorderStyle = BorderStyle.FixedSingle;
+                label2.ForeColor = Color.Gray;
+            }
+            else
+            {
+                LoginPassword.Enabled = true;
+                LoginPassword.BorderStyle = BorderStyle.Fixed3D;
+                label2.ForeColor = SystemColors.ControlText;
             }
         }
     }

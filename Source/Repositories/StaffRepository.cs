@@ -10,6 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Reflection;
+using System.Net.NetworkInformation;
 
 namespace RestaurantManagement.Source.Repositories
 {
@@ -58,6 +59,15 @@ namespace RestaurantManagement.Source.Repositories
             QueryParameter parameter = QueryParameter.Builder().AddParameter("id", id);
 
             return DatabaseHelper.ExecuteNonQuery(query, parameter);
+        }
+
+        public static DataTable GetStaffById(int staffId)
+        {
+            string query = "SELECT id, name, position_id FROM staffs WHERE id = @id";
+
+            QueryParameter parameter = QueryParameter.Builder().AddParameter("id", staffId);
+
+            return DatabaseHelper.ExecuteQuery(query, parameter);
         }
     }
 }

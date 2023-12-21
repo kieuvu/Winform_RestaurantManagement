@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RestaurantManagement.Source.Forms.Booking;
 
 namespace RestaurantManagement.Source.Forms.Reception
 {
@@ -20,11 +21,30 @@ namespace RestaurantManagement.Source.Forms.Reception
         public ReceptionForm()
         {
             InitializeComponent();
+            this.InitForm();
         }
 
-        private void ReceptionForm_Load(object sender, EventArgs e)
+        private void InitForm()
         {
-            AlertHelper.Show(AuthSession.Username);
+            this.ShowWelcomeMessage();
+            this.HideAdminContent();
+        }
+
+        private void ShowWelcomeMessage()
+        {
+            label2.Text = AuthSession.IsAdmin()
+                       ? $"{AuthSession.Username} (ADMIN)!"
+                       : $"{AuthSession.Username} ({StringHelper.PadNumberWithZeros(AuthSession.Id)})!";
+        }
+
+        private void HideAdminContent()
+        {
+            if (AuthSession.IsStaff())
+            {
+                button1.Enabled = false;
+                button2.Enabled = false;
+                button3.Enabled = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,6 +73,16 @@ namespace RestaurantManagement.Source.Forms.Reception
 
             Form food = new FoodForm();
             food.ShowDialog();
+
+            this.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Form booking = new BookingForm();
+            booking.ShowDialog();
 
             this.Show();
         }
