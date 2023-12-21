@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -31,6 +32,20 @@ namespace RestaurantManagement.Source.Repositories
         public static DataTable GetAllUnit()
         {
             return DatabaseHelper.ExecuteQuery("SELECT * FROM food_units");
+        }
+
+        public static int AddFood(string name, int price, int category, int unit) 
+        {
+            string query = "INSERT INTO foods (`name`, `price`, `category_id`, `unit_id`) "
+                         + "VALUES (@name, @price, @category, @unit)";
+
+            QueryParameter parameter = QueryParameter.Builder()
+                                                     .AddParameter("name", name)
+                                                     .AddParameter("price", price)
+                                                     .AddParameter("category", category)
+                                                     .AddParameter("unit", unit);
+
+            return DatabaseHelper.ExecuteNonQuery(query, parameter);
         }
     }
 }

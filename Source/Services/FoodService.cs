@@ -24,5 +24,20 @@ namespace RestaurantManagement.Source.Services
         {
             return FoodRepository.GetAllCategory();
         }
+
+        public static int CreateFood(string name, string price , int category, int unit)
+        {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+                throw new Exception("Vui lòng nhập tên thực phẩm");
+
+            int parsedPrice;
+
+            if (string.IsNullOrEmpty(price) || string.IsNullOrWhiteSpace(price))
+                throw new Exception("Vui lòng nhập giá");
+            else if (!int.TryParse(price, out parsedPrice))
+                throw new Exception("Vui lòng nhập giá hợp lệ");
+
+            return FoodRepository.AddFood(name, parsedPrice, category, unit);
+        }
     }
 }

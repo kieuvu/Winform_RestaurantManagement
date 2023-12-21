@@ -33,9 +33,9 @@ namespace RestaurantManagement.Source.Forms.Food
 
             if (dataSource.Rows.Count > 0)
             {
-                comboBox1.DataSource = dataSource;
-                comboBox1.DisplayMember = "name";
-                comboBox1.ValueMember = "id";
+                comboBox2.DataSource = dataSource;
+                comboBox2.DisplayMember = "name";
+                comboBox2.ValueMember = "id";
             }
         }
 
@@ -45,9 +45,9 @@ namespace RestaurantManagement.Source.Forms.Food
 
             if (dataSource.Rows.Count > 0)
             {
-                comboBox2.DataSource = dataSource;
-                comboBox2.DisplayMember = "name";
-                comboBox2.ValueMember = "id";
+                comboBox1.DataSource = dataSource;
+                comboBox1.DisplayMember = "name";
+                comboBox1.ValueMember = "id";
             }
         }
 
@@ -104,6 +104,28 @@ namespace RestaurantManagement.Source.Forms.Food
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string name = textBox1.Text;
+                string price = textBox2.Text;
+                int category = Convert.ToInt32(comboBox1.SelectedValue);
+                int unit = Convert.ToInt32(comboBox2.SelectedValue);
+
+                int result = FoodService.CreateFood(name, price, category, unit);
+
+                if (result > 0)
+                {
+                    AlertHelper.Show("Thêm thành công");
+                    this.GetListFoods();
+
+                    textBox1.Text = "";
+                    textBox2.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                AlertHelper.Show(ex.Message);
+            }
 
         }
     }
