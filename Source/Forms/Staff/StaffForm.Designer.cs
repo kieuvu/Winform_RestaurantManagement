@@ -52,6 +52,13 @@
             label1 = new Label();
             groupBox2 = new GroupBox();
             listView1 = new ListView();
+            textBox4 = new TextBox();
+            label10 = new Label();
+            textBox7 = new TextBox();
+            label11 = new Label();
+            comboBox2 = new ComboBox();
+            label12 = new Label();
+            button3 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -273,7 +280,14 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(button3);
+            groupBox2.Controls.Add(comboBox2);
+            groupBox2.Controls.Add(label12);
+            groupBox2.Controls.Add(textBox7);
+            groupBox2.Controls.Add(textBox4);
+            groupBox2.Controls.Add(label11);
             groupBox2.Controls.Add(listView1);
+            groupBox2.Controls.Add(label10);
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Location = new Point(0, 0);
             groupBox2.Name = "groupBox2";
@@ -284,15 +298,73 @@
             // 
             // listView1
             // 
-            listView1.Dock = DockStyle.Fill;
+            listView1.Dock = DockStyle.Bottom;
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(3, 19);
+            listView1.Location = new Point(3, 72);
             listView1.Name = "listView1";
-            listView1.Size = new Size(817, 565);
+            listView1.Size = new Size(817, 512);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(98, 27);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(161, 23);
+            textBox4.TabIndex = 26;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(12, 30);
+            label10.Name = "label10";
+            label10.Size = new Size(80, 15);
+            label10.TabIndex = 25;
+            label10.Text = "Tên nhân viên";
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(352, 27);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(162, 23);
+            textBox7.TabIndex = 26;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(285, 30);
+            label11.Name = "label11";
+            label11.Size = new Size(61, 15);
+            label11.TabIndex = 25;
+            label11.Text = "Điện thoại";
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(591, 29);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(104, 23);
+            comboBox2.TabIndex = 26;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(554, 32);
+            label12.Name = "label12";
+            label12.Size = new Size(31, 15);
+            label12.TabIndex = 25;
+            label12.Text = "Vị trí";
+            // 
+            // button3
+            // 
+            button3.Location = new Point(742, 30);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 27;
+            button3.Text = "Tìm kiếm";
+            button3.UseVisualStyleBackColor = true;
             // 
             // StaffForm
             // 
@@ -306,6 +378,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             this.ResumeLayout(false);
         }
 
@@ -335,5 +408,12 @@
         private GroupBox groupBox2;
         private ListView listView1;
         private Button button2;
+        private Button button3;
+        private ComboBox comboBox2;
+        private Label label12;
+        private TextBox textBox7;
+        private TextBox textBox4;
+        private Label label11;
+        private Label label10;
     }
 }

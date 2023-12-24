@@ -52,7 +52,7 @@ namespace RestaurantManagement.Source.Forms.Table
                     { "id", ("ID", 100) },
                     { "quantity", ("Số người", 100) },
                     { "price", ("Giá/Giờ", 100) },
-                    { "floor", ("Tầng", 100) },       
+                    { "floor", ("Tầng", 100) },
                 };
 
                 foreach (KeyValuePair<string, (string DisplayName, int Width)> columnInfo in columnInfoDictionary)
@@ -100,7 +100,7 @@ namespace RestaurantManagement.Source.Forms.Table
                     this.GetListTables();
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 AlertHelper.Show(ex.Message);
             }

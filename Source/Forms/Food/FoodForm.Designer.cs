@@ -40,6 +40,11 @@
             label1 = new Label();
             groupBox2 = new GroupBox();
             listView1 = new ListView();
+            label5 = new Label();
+            comboBox3 = new ComboBox();
+            textBox3 = new TextBox();
+            label6 = new Label();
+            button2 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -143,7 +148,12 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(button2);
+            groupBox2.Controls.Add(textBox3);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(listView1);
+            groupBox2.Controls.Add(comboBox3);
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Location = new Point(0, 100);
             groupBox2.Name = "groupBox2";
@@ -154,15 +164,57 @@
             // 
             // listView1
             // 
-            listView1.Dock = DockStyle.Fill;
+            listView1.Dock = DockStyle.Bottom;
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(3, 19);
+            listView1.Location = new Point(3, 68);
             listView1.Name = "listView1";
-            listView1.Size = new Size(794, 328);
+            listView1.Size = new Size(794, 279);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 30);
+            label5.Name = "label5";
+            label5.Size = new Size(29, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Loại";
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(47, 27);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(80, 23);
+            comboBox3.TabIndex = 9;
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(248, 27);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(203, 23);
+            textBox3.TabIndex = 10;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(146, 30);
+            label6.Name = "label6";
+            label6.Size = new Size(86, 15);
+            label6.TabIndex = 9;
+            label6.Text = "Tên thực phẩm";
+            // 
+            // button2
+            // 
+            button2.Location = new Point(684, 18);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 38);
+            button2.TabIndex = 11;
+            button2.Text = "Tìm kiếm";
+            button2.UseVisualStyleBackColor = true;
             // 
             // FoodForm
             // 
@@ -176,6 +228,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             this.ResumeLayout(false);
         }
 
@@ -193,5 +246,10 @@
         private ComboBox comboBox1;
         private Label label2;
         private Label label1;
+        private Label label5;
+        private ComboBox comboBox3;
+        private Button button2;
+        private TextBox textBox3;
+        private Label label6;
     }
 }

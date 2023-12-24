@@ -29,6 +29,8 @@ namespace RestaurantManagement.Source.Utils
             return dataTable;
         }
 
+
+
         public static int ExecuteNonQuery(string sqlQuery, QueryParameter? queryParameter = null)
         {
             using MySqlConnection connection = DatabaseConfig.GetConnection(true);

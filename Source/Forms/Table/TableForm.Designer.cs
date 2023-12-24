@@ -38,12 +38,14 @@
             comboBox1 = new ComboBox();
             groupBox2 = new GroupBox();
             listView1 = new ListView();
+            button2 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(comboBox2);
@@ -62,7 +64,7 @@
             // button1
             // 
             button1.Cursor = Cursors.Hand;
-            button1.Location = new Point(256, 56);
+            button1.Location = new Point(579, 28);
             button1.Name = "button1";
             button1.Size = new Size(209, 23);
             button1.TabIndex = 6;
@@ -145,6 +147,16 @@
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
             // 
+            // button2
+            // 
+            button2.Cursor = Cursors.Hand;
+            button2.Location = new Point(579, 59);
+            button2.Name = "button2";
+            button2.Size = new Size(209, 23);
+            button2.TabIndex = 7;
+            button2.Text = "Xóa bàn";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -172,5 +184,6 @@
         private Button button1;
         private GroupBox groupBox2;
         private ListView listView1;
+        private Button button2;
     }
 }

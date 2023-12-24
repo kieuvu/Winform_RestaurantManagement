@@ -27,5 +27,10 @@ namespace RestaurantManagement.Source.Services
         {
             return TableRepository.GetAllTables();
         }
+
+        public static DataTable GetUnbookedTableBetweenDate(string dateFrom, string dateTo)
+        {
+             return TableRepository.GetUnbookedTableBetweenDate(dateFrom, dateTo);
+        }
     }
 }
